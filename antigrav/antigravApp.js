@@ -33,7 +33,7 @@
     }
 
     function onWebEventReceived(event) {
-        print("antigravApp.js recieved a web event: " + event);
+        print("antigravApp.js recieved a QML event: " + event.stringify());
         
         if (typeof event === "string") {
             event = JSON.parse(event);
