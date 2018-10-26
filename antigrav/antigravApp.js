@@ -3,6 +3,7 @@
     var APP_QML = Script.resolvePath("AltGrav.qml");
     var APP_ICON = Script.resolvePath("3D-compass.svg");
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
+    var requiredProperties = ['x','y','z'];
     var button = tablet.addButton({
         text: APP_NAME,
         icon: APP_ICON
@@ -11,14 +12,12 @@
     function onClicked() {
         tablet.loadQMLSource(APP_QML);
     }
-    function orientateMe(rotate_deg_x, rotate_deg_y, rotate_deg_z) {
+    function orientateMe(rotation) {
         MyAvatar.orientation =
             Quat.multiply(
                 MyAvatar.orientation,
-                Quat.fromVec3Degrees({
-                    x: rotate_deg_x,
-                    y: rotate_deg_y,
-                    z: rotate_deg_z}
+                Quat.fromVec3Degrees(
+                    rotation
                 )
             );
     }
@@ -27,29 +26,21 @@
         MyAvatar.orientation =
             Quat.fromVec3Degrees({
                 x: 0,
-                y: MyAvatar.orientation.safeEulerAngles(0).y,
+                y: Quat.safeEulerAngles(MyAvatar.orientation).y,
                 z: 0
             })
     }
 
     function onWebEventReceived(event) {
-        print("antigravApp.js recieved a QML event: " + event.stringify());
+        print("antigravApp.js recieved a QML event: " + JSON.stringify(event));
         
-        if (typeof event === "string") {
-            event = JSON.parse(event);
-
             if (event.hasOwnProperty("reset") && event.reset){
                 reset();
             }
-            else {
-                (event.hasOwnProperty("rotation")) {
-                let requiredProperties = ['x','y','z'];
+            else if (event.hasOwnProperty("rotation")) {
 
-                if (requiredProperties.every(function(x) { return x in rotation; })) {
-                    orientateMe(rotation.x, rotation.y, rotation.z);
-                }
+                orientateMe(event.rotation);
             }
-        }
     }
 
     function cleanup() {
@@ -58,6 +49,6 @@
     }
 
     button.clicked.connect(onClicked);
-    tablet.fromQML.connect(onWebEventReceived);
+    tablet.fromQml.connect(onWebEventReceived);
     Script.scriptEnding.connect(cleanup);
 }());

@@ -65,12 +65,12 @@ Rectangle {
         }
 
         font.pixelSize: 16
-        text: "Font"
+        text: "Front"
 
          onClicked: {
              var message = {
                  rotation: {
-                     x: 90,
+                     x: -90,
                      y: 0,
                      z: 0
                  }
@@ -95,7 +95,7 @@ Rectangle {
          onClicked: {
              var message = {
                  rotation: {
-                     x: -90,
+                     x: 90,
                      y: 0,
                      z: 0
                  }
@@ -145,9 +145,11 @@ Rectangle {
 
          onClicked: {
             var message = {
-                x: 0,
-                y: 0,
-                z: -90
+                 rotation: {
+                     x: 0,
+                     y: 0,
+                     z: -90
+                 }
             };
 
             root.sendToScript(message);
@@ -169,9 +171,11 @@ Rectangle {
 
          onClicked: {
             var message = {
-                x: 180,
-                y: 0,
-                z: 0
+                 rotation: {
+                     x: 180,
+                     y: 0,
+                     z: 0
+                 }
             };
 
             root.sendToScript(message);
