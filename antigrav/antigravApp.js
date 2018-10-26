@@ -38,7 +38,7 @@
         if (typeof event === "string") {
             event = JSON.parse(event);
 
-            if (event.hasOwnProperty("reset") and event.reset){
+            if (event.hasOwnProperty("reset") && event.reset){
                 reset();
             }
             else {
@@ -58,6 +58,6 @@
     }
 
     button.clicked.connect(onClicked);
-    tablet.webEventReceived.connect(onWebEventReceived);
+    tablet.fromQML.connect(onWebEventReceived);
     Script.scriptEnding.connect(cleanup);
 }());
