@@ -41,7 +41,7 @@
             if (event.hasOwnProperty("reset") and event.reset){
                 reset();
             }
-            {
+            else {
                 (event.hasOwnProperty("rotation")) {
                 let requiredProperties = ['x','y','z'];
 
