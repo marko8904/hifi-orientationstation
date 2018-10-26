@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Styles 1.4
 
 Rectangle {
     id: root
@@ -183,5 +184,38 @@ Rectangle {
 
             root.sendToScript(message);
         }
+    }
+
+
+    CheckBox {
+        id: snap
+
+        anchors {
+            horizontalCenter: flip.horizontalCenter
+            top: flip.bottom
+            topMargin: 30
+        }
+
+        checked: true
+        onClicked: {
+            var message = {
+                snap: snap.checked
+            }
+
+            root.sendToScript(message);
+        }
+    }
+
+    Text {
+        anchors {
+            verticalCenter: snap.verticalCenter
+            left: snap.right
+            leftMargin: 10
+        }
+
+        text: "Snap"
+        color: "white"
+
+        font.pixelSize: 16
     }
 }
