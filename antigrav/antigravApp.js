@@ -7,6 +7,7 @@
         text: APP_NAME,
         icon: APP_ICON
     });
+    var cardinalDirectionSnap = true;
 
     function onClicked() {
         tablet.loadQMLSource(APP_QML);
@@ -19,11 +20,13 @@
     function orientateMe(rotation) {
         var correctedOrientation = Quat.safeEulerAngles(MyAvatar.orientation);
         
-        correctedOrientation = {
-            x: snapToCardinalDirection(correctedOrientation.x),
-            y: snapToCardinalDirection(correctedOrientation.y),
-            z: snapToCardinalDirection(correctedOrientation.z),
-        };
+        if (cardinalDirectionSnap) {
+            correctedOrientation = {
+                x: snapToCardinalDirection(correctedOrientation.x),
+                y: snapToCardinalDirection(correctedOrientation.y),
+                z: snapToCardinalDirection(correctedOrientation.z),
+            };
+        }
 
         MyAvatar.orientation =
             Quat.multiply(
@@ -52,8 +55,10 @@
                 reset();
             }
             else if (event.hasOwnProperty("rotation")) {
-
                 orientateMe(event.rotation);
+            }
+            else if (event.hasOwnProperty("snap")) {
+                cardinalDirectionSnap = event.snap;
             }
     }
 
