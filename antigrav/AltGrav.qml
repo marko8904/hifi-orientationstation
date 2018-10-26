@@ -9,45 +9,172 @@ Rectangle {
     color: "blue"
     signal sendToScript(var message);
 
-    CheckBox {
-        id: toggleOrientationStation
+
+    Text {
+        id: header
+        anchors {
+            horizontalCenter: root.horizontalCenter
+            top: root.top
+            topMargin: 10
+        }
+
+        color: "white"
+        text: "AntiGrav"
+        font.pixelSize: 30
+    }
+
+    Button {
+        id: toggleAntiGrav
 
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.leftMargin: 40
-        anchors.topMargin: 10
+        anchors.topMargin: 70
+        text: "Reset"
         onClicked: {
             var message = {
-                enable: toggleOrientationStation.checked
+                reset: true
             };
 
             root.sendToScript(message);
         }
     }
 
+
     Text {
-        id: toggleText
+        id: tilt
+
         anchors {
-            verticalCenter: toggleOrientationStation.verticalCenter
-            left: toggleOrientationStation.right
-            leftMargin: 10
+            horizontalCenter: toggleAntiGrav.horizontalCenter
+            top: toggleAntiGrav.top
+            topMargin: 70
         }
-        text: "Turn on"
+
+        font.pixelSize: 20
+        text: "Tilt Avatar"
         color: "white"
     }
 
-
-    Text {
-        id: axis
+    Button {
+        id: front
 
         anchors {
-            horizontalCenter: toggleOrientationStation.horizontalCenter
-            top: toggleOrientationStation.top
-            topMargin: 50
+            horizontalCenter: tilt.horizontalCenter
+            top: tilt.bottom
+            topMargin: 10
         }
 
         font.pixelSize: 16
-        text: "Tilt Avatar"
-        color: "white"
+        text: "Font"
+
+         onClicked: {
+             var message = {
+                 rotation: {
+                     x: 90,
+                     y: 0,
+                     z: 0
+                 }
+            };
+
+            root.sendToScript(message);
+        }
+    }
+
+    Button {
+        id: back
+
+        anchors {
+            horizontalCenter: front.horizontalCenter
+            top: front.bottom
+            topMargin: 30
+        }
+
+        font.pixelSize: 16
+        text: "Back"
+
+         onClicked: {
+             var message = {
+                 rotation: {
+                     x: -90,
+                     y: 0,
+                     z: 0
+                 }
+             };
+
+            root.sendToScript(message);
+        }
+    }
+
+
+    Button {
+        id: left
+
+        anchors {
+            horizontalCenter: back.horizontalCenter
+            top: back.bottom
+            topMargin: 30
+        }
+
+        font.pixelSize: 16
+        text: "Left"
+
+         onClicked: {
+             var message = {
+                 rotation: {
+                     x: 0,
+                     y: 0,
+                     z: 90
+                 }
+            };
+
+            root.sendToScript(message);
+        }
+    }
+
+    Button {
+        id: right
+
+        anchors {
+            horizontalCenter: left.horizontalCenter
+            top: left.bottom
+            topMargin: 30
+        }
+
+        font.pixelSize: 16
+        text: "Right"
+
+         onClicked: {
+            var message = {
+                x: 0,
+                y: 0,
+                z: -90
+            };
+
+            root.sendToScript(message);
+        }
+    }
+
+    Button {
+
+        id: flip
+
+        anchors {
+            horizontalCenter: right.horizontalCenter
+            top: right.bottom
+            topMargin: 30
+        }
+
+        font.pixelSize: 16
+        text: "Flip"
+
+         onClicked: {
+            var message = {
+                x: 180,
+                y: 0,
+                z: 0
+            };
+
+            root.sendToScript(message);
+        }
     }
 }
