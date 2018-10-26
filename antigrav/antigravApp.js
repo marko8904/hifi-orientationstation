@@ -1,7 +1,7 @@
 (function() {
     var APP_NAME = "Antigrav";
     var APP_QML = Script.resolvePath("AltGrav.qml");
-    var APP_ICON = Script.resolvePath("3D-compass.svg");
+    var APP_ICON = Script.resolvePath("3d-compass.svg");
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
     var requiredProperties = ['x','y','z'];
     var button = tablet.addButton({
