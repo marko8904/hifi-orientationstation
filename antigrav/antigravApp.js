@@ -12,10 +12,24 @@
     function onClicked() {
         tablet.loadQMLSource(APP_QML);
     }
+
+    function snapToCardinalDirection(value) {
+        return Math.floor(value/90)*90;
+    }
+
     function orientateMe(rotation) {
+        var correctedOrientation = Quat.safeEulerAngles(MyAvatar.orientation);
+        
+        correctedOrientation = {
+            x: snapToCardinalDirection(correctedOrientation.x),
+            y: correctedOrientation.y,
+            z: snapToCardinalDirection(correctedOrientation.y),
+        };
         MyAvatar.orientation =
             Quat.multiply(
-                MyAvatar.orientation,
+                Quat.fromVec3Degrees(
+                    correctedOrientation
+                ),
                 Quat.fromVec3Degrees(
                     rotation
                 )
