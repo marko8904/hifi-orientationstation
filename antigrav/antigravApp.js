@@ -1,6 +1,6 @@
 (function() {
     var APP_NAME = "Antigrav";
-    var APP_QML = Script.resolvePath("antigravApp.qml");
+    var APP_QML = Script.resolvePath("AltGrav.qml");
     var APP_ICON = Script.resolvePath("3D-compass.svg");
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
     var button = tablet.addButton({
@@ -38,8 +38,11 @@
         if (typeof event === "string") {
             event = JSON.parse(event);
 
-            if (event.hasOwnProperty("rotation")) {
-                let rotation = JSON.parse(event.rotation);
+            if (event.hasOwnProperty("reset") and event.reset){
+                reset();
+            }
+            else {
+                (event.hasOwnProperty("rotation")) {
                 let requiredProperties = ['x','y','z'];
 
                 if (requiredProperties.every(function(x) { return x in rotation; })) {
