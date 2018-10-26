@@ -14,7 +14,7 @@
     }
 
     function snapToCardinalDirection(value) {
-        return Math.floor(value/90)*90;
+        return Math.round(value/90.0)*90;
     }
 
     function orientateMe(rotation) {
@@ -23,8 +23,9 @@
         correctedOrientation = {
             x: snapToCardinalDirection(correctedOrientation.x),
             y: correctedOrientation.y,
-            z: snapToCardinalDirection(correctedOrientation.y),
+            z: snapToCardinalDirection(correctedOrientation.z),
         };
+
         MyAvatar.orientation =
             Quat.multiply(
                 Quat.fromVec3Degrees(
