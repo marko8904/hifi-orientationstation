@@ -6,7 +6,7 @@ Rectangle {
 
     anchors.fill: parent
 
-    color: "blue"
+    color: "grey"
     signal sendToScript(var message);
 
 
@@ -26,10 +26,13 @@ Rectangle {
     Button {
         id: toggleAntiGrav
 
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.leftMargin: 40
-        anchors.topMargin: 70
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: parent.top
+            leftMargin: 40
+            topMargin: 70
+        }
+
         text: "Reset"
         onClicked: {
             var message = {
@@ -85,7 +88,7 @@ Rectangle {
 
         anchors {
             horizontalCenter: front.horizontalCenter
-            top: front.bottom
+            top: left.bottom
             topMargin: 30
         }
 
@@ -110,8 +113,8 @@ Rectangle {
         id: left
 
         anchors {
-            horizontalCenter: back.horizontalCenter
-            top: back.bottom
+            right: front.left
+            top: front.bottom
             topMargin: 30
         }
 
@@ -135,8 +138,8 @@ Rectangle {
         id: right
 
         anchors {
-            horizontalCenter: left.horizontalCenter
-            top: left.bottom
+            left: front.right
+            top: front.bottom
             topMargin: 30
         }
 
@@ -161,8 +164,8 @@ Rectangle {
         id: flip
 
         anchors {
-            horizontalCenter: right.horizontalCenter
-            top: right.bottom
+            horizontalCenter: back.horizontalCenter
+            top: back.bottom
             topMargin: 30
         }
 
