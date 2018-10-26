@@ -3,7 +3,6 @@
     var APP_QML = Script.resolvePath("AltGrav.qml");
     var APP_ICON = Script.resolvePath("3d-compass.svg");
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
-    var requiredProperties = ['x','y','z'];
     var button = tablet.addButton({
         text: APP_NAME,
         icon: APP_ICON
@@ -22,7 +21,7 @@
         
         correctedOrientation = {
             x: snapToCardinalDirection(correctedOrientation.x),
-            y: correctedOrientation.y,
+            y: snapToCardinalDirection(correctedOrientation.y),
             z: snapToCardinalDirection(correctedOrientation.z),
         };
 
